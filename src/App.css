@@ -1,5 +1,23 @@
 /* Make everything look nicer and take out the default css (.App and stuff) */
+/* Custom CSS Rules - Colene */
+.select-box {
+  padding: 10px 20px;
+  color: #90857c;
+  margin: 10px;
+}
 
+.date-input {
+  font-family: sans-serif;
+  padding: 6px 20px;
+  color: #90857c;
+}
+
+textarea {
+  font-family: sans-serif;
+  color: #90857c;
+}
+
+/* Pre-Loaded CSS-Rules */
 .App {
   text-align: center;
   
@@ -15,7 +33,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 .nav-bar-group {
   list-style-type: none;

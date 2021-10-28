@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddForm from '../components/AddForm';
+import AddForm from '../components/AddForms/AddForm';
 import TableColumns from '../components/TableColumns';
 import TableDataCell from '../components/TableDataCell';
 

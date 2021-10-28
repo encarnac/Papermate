@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddForm from '../components/AddForm';
+import AddSubscriptionBillForm from '../components/AddForms/AddSubscriptionBillForm';
 import TableColumns from '../components/TableColumns';
 import TableDataCell from '../components/TableDataCell';
+import { FiEdit } from "react-icons/fi";
 
 function SubscriptionBillsPage() {
 
@@ -29,13 +30,13 @@ function SubscriptionBillsPage() {
         "True"
     ];
 
-    const subBillsTextBoxPlaceHolderText = [            
+    const subBillsAttributes1 = [            
         "Payment Method",       // Hmm, inserting here would affect other tables
         "Member ID",
-        "Plan Type",
-        "Expiration Date",
-        "Total",
-        "Order completed?"
+    ];
+
+    const subBillsAttributes2 = [            
+        "Total", // not an input, should be calculated later based on plan_type selected
     ];
 
 
@@ -51,12 +52,13 @@ function SubscriptionBillsPage() {
                     </thead>
                     <tbody >
                         <tr>              
-                            <TableDataCell rowData={sampleTableDataCells}></TableDataCell>   
+                            <TableDataCell rowData={sampleTableDataCells}></TableDataCell>
+                            <button class="edit-button"><FiEdit/></button>   
                         </tr>
                     </tbody>   
                 </table>
             </div>
-            <AddForm textBoxText={subBillsTextBoxPlaceHolderText} title={"Add Subscription Bill"} buttonText={"Add"}></AddForm>
+            <AddSubscriptionBillForm textBoxText1={subBillsAttributes1} textBoxText2={subBillsAttributes2} title={"Add Subscription Bill"} buttonText={"Add"}></AddSubscriptionBillForm>
 
         </>
     );

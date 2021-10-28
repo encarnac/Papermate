@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddForm from '../components/AddForm';
+import AddBookForm from '../components/AddForms/AddBookForm';
 import SearchForm from '../components/SearchForm';
 import TableColumns from '../components/TableColumns';
 import TableDataCell from '../components/TableDataCell';
 import TextBox from '../components/TextBox';
+import { FiEdit } from "react-icons/fi";
 
 
 function BooksPage() {
@@ -34,18 +35,17 @@ function BooksPage() {
             "40,000"
         ];
     
-        const booksAttributePlaceHolderText = [
-            "isbn",
+        const booksAttributes1 = [
+            "ISBN",
             "Title",
             "Author's first name",
-            "Author's last name",
-            "Description",
-            "Date published",
-            "Date released",
-            "Average rating",
-            "Amount in stock"            
+            "Author's last name",        
         ];
-    
+
+        const booksAttributes2 = [
+            "Average rating",
+            "Amount in stock"    
+        ];
     
         return (
             <>
@@ -60,11 +60,12 @@ function BooksPage() {
                         <tbody >
                             <tr>                        
                                <TableDataCell rowData={sampleTableDataCells}></TableDataCell>
+                               <button class="edit-button"><FiEdit/></button>
                             </tr>
                         </tbody>   
                     </table>
                 </div>
-                <AddForm textBoxText={booksAttributePlaceHolderText} title={"Add Book"} buttonText={"Add"}></AddForm>
+                <AddBookForm textBoxText1={booksAttributes1} textBoxText2={booksAttributes2} title={"Add Book"} buttonText={"Add"}></AddBookForm>
 
                 <SearchForm textBoxText={"Enter isbn, title, etc..."} searchText={"Search inventory"}></SearchForm>
             </>

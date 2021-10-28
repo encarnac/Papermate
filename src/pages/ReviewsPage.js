@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddForm from '../components/AddForm';
+import AddReviewForm from '../components/AddForms/AddReviewForm';
 import TableColumns from '../components/TableColumns';
 import TableDataCell from '../components/TableDataCell';
+import { FiTrash, FiEdit } from "react-icons/fi";
+
 function ReviewsPage() {
         // these arrays will come later come from SELECT statements
         const tableHeaders = [
@@ -27,11 +29,8 @@ function ReviewsPage() {
     
         const reviewsAttributePlaceHolderText = [
             "Member ID",
-            "isbn",
-            "Date",
-            "Write your comment",
-            "Rating",
-            "Recommend?"          
+            "ISBN",
+            "Rating"        
         ];
     
     
@@ -48,12 +47,13 @@ function ReviewsPage() {
                         <tbody >
                             <tr>                        
                                <TableDataCell rowData={sampleTableDataCells}></TableDataCell>
-                               <button class="delete-button">Delete</button>
+                               <button class="edit-button"><FiEdit/></button>
+                               <button class="delete-button">< FiTrash/></button>
                             </tr>
                         </tbody>   
                     </table>
                 </div>
-                <AddForm textBoxText={reviewsAttributePlaceHolderText} title={"Add Review"} buttonText={"Add"}></AddForm>
+                <AddReviewForm textBoxText={reviewsAttributePlaceHolderText} title={"Add Review"} buttonText={"Add"}></AddReviewForm>
 
             </>
         );

@@ -25,6 +25,7 @@ function HomePage() {
                 month. For now, communication between members is outsourced to Discord but future plans
                 exist to incorporate message boards.
             </p>
+            
         </>
     )
 }

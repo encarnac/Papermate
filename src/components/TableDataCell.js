@@ -4,7 +4,7 @@ import React from 'react';
 function TableDataCell({rowData}) {
     return ( 
         <>
-            {rowData.map((text, i) => <td class="table-data-cell">{text}</td>)}      
+            {rowData.map((text, i) => <td class="table-data-cell">{text}</td>)}
         </>
     );
 }

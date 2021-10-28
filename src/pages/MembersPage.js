@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddForm from '../components/AddForm';
+import AddMemberForm from '../components/AddForms/AddMemberForm';
 import TableColumns from '../components/TableColumns';
 import TableDataCell from '../components/TableDataCell';
+import { FiEdit } from "react-icons/fi";
 
 function MembersPage() {
 
@@ -29,23 +30,28 @@ function MembersPage() {
         "(555)432-1987",
         "456 Real St",        
         "Suite 2A", 
-        "Maryland",
+        "CA",
         "USA",
         "84372",
         "True", 
     ];
 
-    const memberAttributePlaceHolderText = [
+    const memberAttributes1 = [
         "First name",
         "Last name",
-        "email",
-        "Phone number",
+        "Email",
+        "Phone Number",
+    ];
+
+    const memberAttributes2 = [
         "Address (line 1)",
         "Address (line 2)",
-        "State",
+
+    ];
+
+    const memberAttributes3 = [
         "City",
         "Postal code",
-        "Auto renew?",  // dropdown?
     ];
 
 
@@ -62,11 +68,12 @@ function MembersPage() {
                     <tbody >
                         <tr>                        
                            <TableDataCell rowData={sampleTableDataCells}></TableDataCell>
+                           <button class="edit-button"><FiEdit/></button>
                         </tr>
                     </tbody>   
                 </table>
             </div>
-            <AddForm textBoxText={memberAttributePlaceHolderText} title={"Add Member"}></AddForm>
+            <AddMemberForm textBoxText1={memberAttributes1} textBoxText2={memberAttributes2} textBoxText3={memberAttributes3} title={"Add Member"}></AddMemberForm>
         </>
     );
 }

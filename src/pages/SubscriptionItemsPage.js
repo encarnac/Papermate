@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddForm from '../components/AddForm';
+import AddSubItemForm from '../components/AddForms/AddSubItemForm';
 import TableColumns from '../components/TableColumns';
 import TableDataCell from '../components/TableDataCell';
 
@@ -29,7 +29,6 @@ function SubscriptionItemsPage() {
         "Subscription ID",       // Hmm, inserting here would affect other tables
         "isbn",
         "Quantity",             // number
-        "Book status"           // dropdown
     ];
 
 
@@ -50,8 +49,7 @@ function SubscriptionItemsPage() {
                     </tbody>   
                 </table>
             </div>
-            <AddForm textBoxText={subItemsTextBoxPlaceHolderText} title={"Add Subscription Item"} buttonText={"Add"}></AddForm>
-
+            <AddSubItemForm textBoxText={subItemsTextBoxPlaceHolderText} title="Add Subscription Item" buttonText={"Add"}></AddSubItemForm>
         </>
     );
 }

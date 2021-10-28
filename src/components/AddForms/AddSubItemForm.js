@@ -1,8 +1,8 @@
 import React from 'react';
-import TextBox from './TextBox';
+import TextBox from '../TextBox';
 
 
-function AddForm({ textBoxText, title, buttonText }) {
+function AddSubItemForm({ textBoxText, title, buttonText }) {
 
     const submitButtonClick = (event) => {       
         event.preventDefault();        
@@ -18,6 +18,13 @@ function AddForm({ textBoxText, title, buttonText }) {
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
                 {textBoxText.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
+                <select name="book-status" class="select-box">
+                    <option value="">Status: </option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="returned">Returned</option>
+                </select>
                 <p></p>
                 <input type="submit" value={buttonText} class="add-button"></input>
 
@@ -27,4 +34,4 @@ function AddForm({ textBoxText, title, buttonText }) {
 
 }
 
-export default AddForm;
+export default AddSubItemForm;
