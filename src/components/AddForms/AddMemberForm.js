@@ -17,12 +17,8 @@ function AddMemberForm({ textBoxText1, textBoxText2, textBoxText3, title, button
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                <p>
-                    {textBoxText1.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
-                </p>
-                <p>
-                    {textBoxText2.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
-                </p>
+                    {textBoxText1.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
+                    {textBoxText2.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p>
                     <select class="select-box">
                         <option value="">State:</option>
@@ -78,14 +74,15 @@ function AddMemberForm({ textBoxText1, textBoxText2, textBoxText3, title, button
                         <option value="WV">WV</option>
                         <option value="WY">WY</option>
                     </select>
-                    {textBoxText3.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
+                    {textBoxText3.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 </p>
-                <select name="auto-renew" class="select-box">
-                    <option value="">Auto-Renew: </option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                </select>
-                <p></p>
+                <p>
+                    <select name="auto-renew" class="select-box">
+                        <option value="">Auto-Renew: </option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </p>
                 <input type="submit" value={buttonText} class="add-button"></input>
 
             </fieldset>

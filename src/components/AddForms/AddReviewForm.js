@@ -17,7 +17,7 @@ function AddReviewForm({ textBoxText, title, buttonText }) {
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                {textBoxText.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
+                {textBoxText.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p>
                     <label for="date-posted">Date Posted: </label>
                     <input type="date" id="date-posted" class="date-input" name="date-posted"></input>

@@ -17,8 +17,8 @@ function AddSubscriptionBillForm({ textBoxText1, textBoxText2, title, buttonText
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
+                {textBoxText1.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p>
-                    {textBoxText1.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
                     <select name="plan-type" class="select-box">
                         <option value="">Plan Type:</option>
                         <option value="Tier 1">Tier 1</option>
@@ -30,10 +30,12 @@ function AddSubscriptionBillForm({ textBoxText1, textBoxText2, title, buttonText
                 <p>
                     <label for="order-date"> Order Date: </label>
                     <input type="date" id="order-date" class="date-input" name="order-date"></input>
+                </p>
+                <p>
                     <label for="expiration-date"> Expiration Date: </label>
                     <input type="date" id="expiration-date" class="date-input" name="expiration-date"></input>
                 </p>
-                {textBoxText2.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
+                {textBoxText2.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p>
                     <select name="order-completed" class="select-box">
                         <option value="">Order Completed:</option>
@@ -41,7 +43,6 @@ function AddSubscriptionBillForm({ textBoxText1, textBoxText2, title, buttonText
                         <option value="False">False</option>
                     </select>
                 </p>
-                <p></p>
                 <input type="submit" value={buttonText} class="add-button"></input>
 
             </fieldset>

@@ -17,11 +17,13 @@ function AddPaymentForm({ textBoxText, title, buttonText }) {
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                {textBoxText.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
-                <label for="cc-exp">Exp: </label>
-                <input type="month" id="cc-exp" class="date-input" name="cc-exp" value="2021-10" />
-                <p></p>
+                {textBoxText.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
+                <p>
+                    <label for="cc-exp">Exp: </label>
+                    <input type="month" id="cc-exp" class="date-input" name="cc-exp" value="2021-10" />
+                </p>
                 <input type="submit" value={buttonText} class="add-button"></input>
+
 
             </fieldset>
         </form>

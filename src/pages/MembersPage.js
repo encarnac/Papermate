@@ -73,7 +73,7 @@ function MembersPage() {
                     </tbody>   
                 </table>
             </div>
-            <AddMemberForm textBoxText1={memberAttributes1} textBoxText2={memberAttributes2} textBoxText3={memberAttributes3} title={"Add Member"}></AddMemberForm>
+            <AddMemberForm textBoxText1={memberAttributes1} textBoxText2={memberAttributes2} textBoxText3={memberAttributes3} title={"Add Member"} buttonText={"Add"}></AddMemberForm>
         </>
     );
 }

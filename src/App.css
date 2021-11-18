@@ -6,6 +6,11 @@
   margin: 10px;
 }
 
+form {
+  width: 20%;
+  margin: auto;
+}
+
 .date-input {
   font-family: sans-serif;
   padding: 6px 20px;
@@ -88,27 +93,31 @@ table, caption, thead, tbody, tr, th, td {
 }
 
 .add-form {
-  padding: 2.5%;
+  padding: 1%;
 }
 
 .add-text-box {
   padding: .5%;
   margin: .5%;
 }
+
 .add-button {  
   /* need to position better and style */
 }
 
 .add-button:hover{
-  background-color: #4CAF50; /* Green */
+  background-color: #90857c; /* Gray */
   color: white;
 }
 
 .delete-button:hover {
-  background-color: red; 
+  background-color: #90857c; /* Gray */
   color: white;
 }
 
+p {
+  text-align: center;
+}
 
 .App-header {
   background-color: #282c34;

@@ -17,9 +17,7 @@ function AddBookForm({ textBoxText1, textBoxText2, title, buttonText }) {
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                <p>
-                    {textBoxText1.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
-                </p>
+                    {textBoxText1.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p>
                     <textarea id="book-description" name="description" rows="4" cols="50">Book Description</textarea>
                 </p>
@@ -31,9 +29,7 @@ function AddBookForm({ textBoxText1, textBoxText2, title, buttonText }) {
                     <label for="release-date"> Release Date: </label>
                     <input type="date" id="release-date" class="date-input" name="release-date"></input>
                 </p>
-                <p>
-                    {textBoxText2.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
-                </p>
+                {textBoxText2.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <input type="submit" value={buttonText} class="add-button"></input>
 
             </fieldset>

@@ -17,15 +17,16 @@ function AddSubItemForm({ textBoxText, title, buttonText }) {
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                {textBoxText.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
-                <select name="book-status" class="select-box">
-                    <option value="">Status: </option>
-                    <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="returned">Returned</option>
-                </select>
-                <p></p>
+                {textBoxText.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
+                <p>
+                    <select name="book-status" class="select-box">
+                        <option value="">Status: </option>
+                        <option value="processing">Processing</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="returned">Returned</option>
+                    </select>
+                </p>
                 <input type="submit" value={buttonText} class="add-button"></input>
 
             </fieldset>

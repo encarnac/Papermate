@@ -17,7 +17,7 @@ function AddForm({ textBoxText, title, buttonText }) {
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                {textBoxText.map((text, i) => <TextBox textBoxText={text}></TextBox>)}
+                {textBoxText.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p></p>
                 <input type="submit" value={buttonText} class="add-button"></input>
 
