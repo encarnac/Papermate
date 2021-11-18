@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -13,7 +12,6 @@ import BookGenresPage from './pages/BookGenresPage';
 import GenresPage from './pages/GenresPage';
 import ReviewsPage from './pages/ReviewsPage';
 
-// test for github
 function App() {
   return (
     <div className="App">

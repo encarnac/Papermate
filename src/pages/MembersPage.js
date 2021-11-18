@@ -19,7 +19,7 @@ function MembersPage() {
         "state",
         "city",
         "postal_code",
-        "auto_renew",
+        "auto_renew"
     ];
 
     const sampleTableDataCells = [
@@ -33,25 +33,24 @@ function MembersPage() {
         "CA",
         "USA",
         "84372",
-        "True", 
+        "True" 
     ];
 
     const memberAttributes1 = [
         "First name",
         "Last name",
         "Email",
-        "Phone Number",
+        "Phone Number"
     ];
 
     const memberAttributes2 = [
         "Address (line 1)",
-        "Address (line 2)",
-
+        "Address (line 2)"
     ];
 
     const memberAttributes3 = [
         "City",
-        "Postal code",
+        "Postal code"
     ];
 
 

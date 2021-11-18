@@ -1,10 +1,48 @@
 import React from 'react';
 import TextBox from '../TextBox';
+import { useState, useEffect } from 'react';
 
 
 function AddMemberForm({ textBoxText1, textBoxText2, textBoxText3, title, buttonText }) {
 
-    const submitButtonClick = (event) => {       
+    
+    const [firstName, setFirstName] = useState('');     
+   
+
+        // Read
+        //const loadMembers = async () => {
+        //    const response = await fetch('/exercises');   
+        //    // something here??
+        //    const data = await response.json();
+        //    setExercises(data);             
+        //}
+    
+        // useEffect hook calls a function -> that function calls the Fetch API -> the Fetch API makes the HTTP request
+        //useEffect(() => {  // Update at the time of rendering
+        //    loadExercises();  
+        //}, []);        
+        
+        // Update   
+        //const onEdit = exercise => {  
+        //    setExerciseToEdit(exercise);          
+        //    history.push("/edit-exercise");
+        //}
+    
+    
+    
+    // FOLOW VID @15 mins
+    const submitButtonClick = async (event) => {
+        
+        // input validation -> are textboxes empty?
+        const newMember = { firstName };
+        const response = await fetch('/create_member', {
+            method: 'POST',
+            body: JSON.stringify(newMember),
+            headers: {
+                'Content-Type': 'application/json', }
+        });
+        // if status is good?       
+
         event.preventDefault();        
     }
 
@@ -17,7 +55,7 @@ function AddMemberForm({ textBoxText1, textBoxText2, textBoxText3, title, button
         <form action="" class="add-form" onSubmit={(event) => submitButtonClick(event)}>
             <fieldset class="add-fieldset">          
                 <legend>{title}</legend>
-                    {textBoxText1.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
+                    {textBoxText1.map((text, i) => <p><TextBox textBoxText={text} setValue={setFirstName}></TextBox></p>)}
                     {textBoxText2.map((text, i) => <p><TextBox textBoxText={text}></TextBox></p>)}
                 <p>
                     <select class="select-box">
