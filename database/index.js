@@ -1,15 +1,18 @@
 const express = require('express');
 const app = express();
 const mysql = require('./dbcon.js');
+const PORT = 1096;
 
-// Configure Express to handle JSON and form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
+// add endpoints corresponding to all other tables
 app.post('/create_member', (request, response) => {
 
-    // request.body...
+    // once this app is connected to db backend,
+    // test with first_name only first,
+    // then write code for all other attributes 
     const requestBody = request.body;
     const firstName = requestBody.firstName;
 
@@ -22,5 +25,8 @@ app.post('/create_member', (request, response) => {
     });
 });
 
-mysql.pool.query(`SELECT * FROM Members`);
+// mysql.pool.query(`SELECT * FROM Members`);
 
+app.listen(PORT, () => {
+    console.log(`listening on http://localhost: ${PORT}`);
+});

@@ -6,31 +6,10 @@ import { useState, useEffect } from 'react';
 function AddMemberForm({ textBoxText1, textBoxText2, textBoxText3, title, buttonText }) {
 
     
-    const [firstName, setFirstName] = useState('');     
-   
+    // add these useState()s for all input for every table
+    
+    const [firstName, setFirstName] = useState(''); 
 
-        // Read
-        //const loadMembers = async () => {
-        //    const response = await fetch('/exercises');   
-        //    // something here??
-        //    const data = await response.json();
-        //    setExercises(data);             
-        //}
-    
-        // useEffect hook calls a function -> that function calls the Fetch API -> the Fetch API makes the HTTP request
-        //useEffect(() => {  // Update at the time of rendering
-        //    loadExercises();  
-        //}, []);        
-        
-        // Update   
-        //const onEdit = exercise => {  
-        //    setExerciseToEdit(exercise);          
-        //    history.push("/edit-exercise");
-        //}
-    
-    
-    
-    // FOLOW VID @15 mins
     const submitButtonClick = async (event) => {
         
         // input validation -> are textboxes empty?
@@ -40,15 +19,9 @@ function AddMemberForm({ textBoxText1, textBoxText2, textBoxText3, title, button
             body: JSON.stringify(newMember),
             headers: {
                 'Content-Type': 'application/json', }
-        });
-        // if status is good?       
+        });     
 
         event.preventDefault();        
-    }
-
-    const textBoxChange = (event) => {
-      //  setMemberAttribute(event.target.value);
-      // (in input<> onChange={event => textBoxChange(event)})
     }
 
     return (
