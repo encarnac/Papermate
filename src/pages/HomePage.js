@@ -7,10 +7,13 @@ function HomePage() {
           <>
           <div >
           <Container >
+               {/* Row for the page title and short description */}
                <Row>
                <h1 class="display-6">Papermate</h1>
                <small class="text-muted">An online book subscription service</small>
                </Row>
+
+               {/* Row of Three Cards for Members, Saved Payments, and Subscription Bills */}
                <Row>
                <CardGroup >
                     <Card >
@@ -52,7 +55,7 @@ function HomePage() {
                </CardGroup>
                </Row>
 
-
+               {/* Row of Cards for Books, Book Genres, and Genres */}
                <Row>
                <CardGroup> 
                     <Card>
@@ -93,6 +96,8 @@ function HomePage() {
                     </Card>
                </CardGroup>     
                </Row>
+
+               {/* Row containing a Card for Reviews */}
                <Row>
                     <Col></Col>
                     <Col>

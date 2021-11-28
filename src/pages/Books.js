@@ -14,10 +14,11 @@ function Books() {
                </Container>
           </div>
 
+          {/* ------------- Add Form ----------- */}
           <div class="input-form-group">
                <Container>
                     <Card>
-                         <Card.Header>Create New Genre</Card.Header>
+                         <Card.Header>Add New Book</Card.Header>
                          <Card.Body>
                               <Card.Text>
                                    <Form>

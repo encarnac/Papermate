@@ -14,22 +14,28 @@ function SavedPayments() {
                </Container>
           </div>
 
-
+          {/* ------------- Add Form ----------- */}
           <div class="input-form-group">
                <Container>
                     <Card>
-                         <Card.Header>Create New Genre</Card.Header>
+                         <Card.Header>Add New Saved Payment</Card.Header>
                          <Card.Body>
                               <Card.Text>
                                    <Form>
-                                        <FloatingLabel className="mb-3" controlId="floatingSelect" label="genre_id from Genres">
-                                             <Form.Select aria-label="Floating label select example">
-                                                  <option>SELLECT genre_id FROM Genres</option>
-                                                  <option value="1">One</option>
-                                                  <option value="2">Two</option>
-                                                  <option value="3">Three</option>
-                                             </Form.Select>
-                                        </FloatingLabel>
+                                        <Form.Group as={Row} className="mb-3" controlId="">
+                                             <Form.Label column sm={2}>
+                                                  member_id
+                                             </Form.Label>
+                                             <FloatingLabel className="col-sm-10 mb-3" controlId="floatingSelect" label="member_id from Members">
+                                                  <Form.Select>
+                                                       <option>member_id</option>
+                                                       <option value="1">One</option>
+                                                       <option value="2">Two</option>
+                                                       <option value="3">Three</option>
+                                                  </Form.Select>
+                                             </FloatingLabel>
+                                        </Form.Group>
+
 
                                         <Form.Group as={Row} className="mb-3" controlId="">
                                              <Form.Label column sm={2}>
