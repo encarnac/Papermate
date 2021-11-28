@@ -1,59 +1,68 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container'
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import MembersPage from './pages/MembersPage';
+import { Link } from 'react-router-dom';
+
 import TopNavBar from './components/TopNavBar';
-import SavedPaymentsPage from './pages/SavedPaymentsPage';
-import SubscriptionBillsPage from './pages/SubscriptionBillsPage';
-import SubscriptionItemsPage from './pages/SubscriptionItemsPage';
-import BooksPage from './pages/BooksPage';
-import BookGenresPage from './pages/BookGenresPage';
-import GenresPage from './pages/GenresPage';
-import ReviewsPage from './pages/ReviewsPage';
+import HomePage from './pages/HomePage';
+import Members from './pages/Members';
+import SavedPayments from './pages/SavedPayments';
+import SubscriptionBills from './pages/SubscriptionBills';
+import SubscriptionItems from './pages/SubscriptionItems';
+import Books from './pages/Books';
+import BookGenres from './pages/BookGenres';
+import Genres from './pages/Genres';
+import Reviews from './pages/Reviews';
+
+
+
 
 function App() {
+
+  
   return (
     <div className="App">
-
+      
       <Router>
-        <TopNavBar></TopNavBar>
+        <TopNavBar/>
         <div>
 
           <Route path="/" exact>
-            <HomePage></HomePage>
+            <HomePage />
           </Route>
 
           <Route path="/members" exact>
-            <MembersPage></MembersPage>
+            <Members />
           </Route>
 
           <Route path="/saved_payments" exact>
-            <SavedPaymentsPage></SavedPaymentsPage>
+            <SavedPayments />
           </Route>
 
           <Route path="/subscription_bills" exact>
-            <SubscriptionBillsPage></SubscriptionBillsPage>
+            < SubscriptionBills />
           </Route>
 
           <Route path="/subscription_items" exact>
-            <SubscriptionItemsPage></SubscriptionItemsPage>
+            < SubscriptionItems />
           </Route>
 
           <Route path="/books" exact>
-            <BooksPage></BooksPage>
+            <Books />
           </Route>
 
           <Route path="/book_genres" exact>
-            <BookGenresPage></BookGenresPage>
+            <BookGenres />
           </Route>
 
           <Route path="/genres" exact>
-            <GenresPage></GenresPage>
+            <Genres />
           </Route>
-          
+
           <Route path="/reviews" exact>
-            <ReviewsPage></ReviewsPage>
+            <Reviews />
           </Route>
 
         </div>

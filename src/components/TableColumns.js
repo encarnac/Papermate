@@ -1,12 +1,11 @@
 import React from 'react';
 
-
-function TableColumns({tableHeaders}) {
-    return ( 
-        <>
-            {tableHeaders.map((text, i) => <th class="table-header">{text}</th>)}      
+function TableColumns({columnName}) {
+    return (
+        <>  
+        <th>{columnName}</th>
         </>
-    );
-}
+    ); 
+};
 
-export default TableColumns;
+export default TableColumns; 

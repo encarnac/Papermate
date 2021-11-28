@@ -1,31 +1,5 @@
-/* Make everything look nicer and take out the default css (.App and stuff) */
-/* Custom CSS Rules - Colene */
-.select-box {
-  padding: 10px 20px;
-  color: #90857c;
-  margin: 10px;
-}
-
-form {
-  width: 20%;
-  margin: auto;
-}
-
-.date-input {
-  font-family: sans-serif;
-  padding: 6px 20px;
-  color: #90857c;
-}
-
-textarea {
-  font-family: sans-serif;
-  color: #90857c;
-}
-
-/* Pre-Loaded CSS-Rules */
 .App {
   text-align: center;
-  
 }
 
 .App-logo {
@@ -37,86 +11,6 @@ textarea {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.nav-bar-group {
-  list-style-type: none;
-  margin: 0;
-  padding: .75%;
-  overflow: hidden;
-  background-color: #333;
-}
-
-.nav-bar-items {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.nav-home {
-  float: right;
-  padding-right: 2%;
-}
-
-.nav-bar-items:hover {
-  color: aqua;
-}
-
-/* disable native link-styling */
-.text-link {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.home-intro-text {
-  padding: 0 3% 3% 3%;   /* top, right, down, left */
-}
-
-.table-div {
-  display: flex;
-  justify-content: center;
-  
-}
-
-table, caption, thead, tbody, tr, th, td {  
-  color:black;
-  border: solid black;
-  box-shadow: 1px 1px 1px 1px skyblue;
-}
-
-.table-caption {
-  font-size: 16sp;  
-  padding: 1%;
-}
-
-.add-form {
-  padding: 1%;
-}
-
-.add-text-box {
-  padding: .5%;
-  margin: .5%;
-}
-
-.add-button {  
-  /* need to position better and style */
-}
-
-.add-button:hover{
-  background-color: #90857c; /* Gray */
-  color: white;
-}
-
-.delete-button:hover {
-  background-color: #90857c; /* Gray */
-  color: white;
-}
-
-p {
-  text-align: center;
 }
 
 .App-header {
@@ -141,4 +35,37 @@ p {
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* ----------Top Nav Bar Styles---------- */
+.nav-bar-group {
+  list-style-type: none;
+  margin: 0;
+  padding: .75%;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav-bar-items {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav-home {
+  float: right;
+  padding-right: 2%;
+}
+
+.nav-bar-items:hover {
+  color: #95B1AF;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
 }

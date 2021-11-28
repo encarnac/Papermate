@@ -1,33 +1,127 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Container, Row, Col, Card, Button, CardGroup } from 'react-bootstrap'
 
 function HomePage() {
-    return (
-        <>
-            <h1>Papermate</h1>
-            <p class="home-intro-text">Survey data showed that the number of adults who did not read books in one year rose
-                from 8% in 1978 to 23% in 2021. Another study found that 80% of teenagers do not read for
-                pleasure. To compound these issues is the phenomenon coined by psychologists as “The
-                Paradox of Choice”, which describes how more options result in analysis paralysis and
-                dissatisfaction with decisions. To promote reading in young adults in the digital age and remove
-                the obstacle of finding a good book, Papermate offers a monthly subscription service for
-                hardcover books from a curated list of praised novels. The website’s database will allow
-                Members to save multiple Payment Methods and renew their subscription by paying
-                Subscription Bills every month. With an active subscription and depending on the tier chosen
-                (ranging from one to four books costing $12, $20, $30, or $40 a month), a Member can select
-                their Book(s) and have it shipped to their address. Members are also able to leave Reviews for
-                Books and join Discord servers corresponding to different Genres, further promoting a sense of
-                community by connecting people with similar tastes. Papermate is a small start-up, averaging
-                1,000 active users per month and a selection of 5 books from 11 possible genres available every
-                month. For now, communication between members is outsourced to Discord but future plans
-                exist to incorporate message boards.
-            </p>
-            
-        </>
-    )
+     return (
+          <>
+          <div >
+          <Container >
+               {/* Row for the page title and short description */}
+               <Row>
+               <h1 class="display-6">Papermate</h1>
+               <small class="text-muted">An online book subscription service</small>
+               </Row>
+
+               {/* Row of Three Cards for Members, Saved Payments, and Subscription Bills */}
+               <Row>
+               <CardGroup >
+                    <Card >
+                         <Card.Header>Members</Card.Header>
+                         <Card.Body>
+                              <Card.Title as="H6">Properties:</Card.Title>
+                              <Card.Text>
+                                   <p>member_id, first_name, last_name, email, phone_number, address_line, address_line_2, state, city, postal_code, auto_renew</p>
+                              </Card.Text>
+                              <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/members">Manage</Link>
+                              </Button>
+                         </Card.Body>
+                    </Card>
+                    <Card>
+                         <Card.Header>Saved Payments</Card.Header>
+                         <Card.Body>
+                              <Card.Title as="H6">Properties:</Card.Title>
+                              <Card.Text>
+                                   <p>payment_method, member_id, cc_name, cc_num, cc_exp, cc_cvc</p>
+                              </Card.Text>
+                              <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/saved_payments">Manage</Link>
+                              </Button>
+                         </Card.Body>
+                    </Card>
+                    <Card>
+                         <Card.Header>Subscription Bills</Card.Header>
+                         <Card.Body>
+                              <Card.Title as="H6">Properties:</Card.Title>
+                              <Card.Text>
+                                   <p>subscription_id, payment_method, member_id, plan_type, order_date, expiration_date, total, order_completed</p>
+                              </Card.Text>
+                              <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/subscription_bills">Manage</Link>
+                              </Button>
+                         </Card.Body>
+                    </Card>
+               </CardGroup>
+               </Row>
+
+               {/* Row of Cards for Books, Book Genres, and Genres */}
+               <Row>
+               <CardGroup> 
+                    <Card>
+                         <Card.Header>Books</Card.Header>
+                         <Card.Body>
+                              <Card.Title as="H6">Properties:</Card.Title>
+                              <Card.Text>
+                                   <p>isbn, title, author_first, author_last, description, date_published, release_date, avg_rating, stock</p>
+                              </Card.Text>
+                              <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/books">Manage</Link>
+                              </Button>
+                         </Card.Body>
+                    </Card>
+                    <Card>
+                         <Card.Header>Book Genres</Card.Header>
+                         <Card.Body>
+                              <Card.Title as="H6">Properties:</Card.Title>
+                              <Card.Text>
+                                   <p>book_genres_id, genre_id, isbn</p>
+                              </Card.Text>
+                              <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/book_genres">Manage</Link>
+                              </Button>
+                         </Card.Body>
+                    </Card>
+                    <Card>
+                         <Card.Header>Genres</Card.Header>
+                         <Card.Body>
+                              <Card.Title as="H6">Properties:</Card.Title>
+                              <Card.Text>
+                                   <p>genre_id, genre, community_url</p>
+                              </Card.Text>
+                              <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/genres">Manage</Link>
+                              </Button>
+                         </Card.Body>
+                    </Card>
+               </CardGroup>     
+               </Row>
+
+               {/* Row containing a Card for Reviews */}
+               <Row>
+                    <Col></Col>
+                    <Col>
+                    <CardGroup>
+                         <Card>
+                              <Card.Header>Reviews</Card.Header>
+                              <Card.Body>
+                                   <Card.Title as="H6">Properties:</Card.Title>
+                                   <Card.Text>
+                                        <p>review_id, member_id, isbn, date_posted, comment, rating, recommend</p>
+                                   </Card.Text>
+                                   <Button variant="secondary" size="sm">
+                                   <Link class="text-link" to="/reviews">Manage</Link>
+                              </Button>
+                              </Card.Body>
+                         </Card>
+                    </CardGroup>
+                    </Col>
+                    <Col></Col>     
+               </Row>
+          </Container>
+          </div>
+          </>
+     )
 }
 
 export default HomePage;
