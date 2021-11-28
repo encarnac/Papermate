@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
 import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
@@ -6,15 +7,14 @@ function Genres() {
      const genresProperties = ['genre_id', 'genre', 'community_url'];
      const [listGenres, setGenres] = useState([])
 
-     const loadGenres = async function () {
-          const response = await fetch('/genres');
-          const genreData = await response.json();
-          setGenres(genreData);
-     }
 
-     useEffect(() => {
-          loadGenres();},
-          []);
+
+     useEffect(()=>{
+          Axios.get("http://flip1.engr.oregonstate.edu:5983/genres").then((data)=>{
+          setGenres(data.data)
+          });
+          },[])
+
 
      return (
           <>
@@ -22,7 +22,7 @@ function Genres() {
           <div class="displayed-table">
                <Container>
                     <h1 class="display-6">Genres</h1>
-                    <TableFrame columnNames={genresProperties}/>
+                    <TableFrame columnNames={genresProperties} rowData={listGenres} />
                </Container>
           </div>
 
@@ -63,8 +63,6 @@ function Genres() {
                     </Card>
                </Container>
           </div>
-
-          {/* ------------- Add Data Here ----------- */}
 
           </>
      )
