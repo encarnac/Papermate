@@ -1,22 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import TableFrame from '../components/TableFrame';
 import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
-function Members() {
-     const membersProperties = ['member_id', 'first_name', 'last_name', 'email', 'phone_number', 'address_line', 'address_line_2', 'state', 'city', 'postal_code', 'auto_renew'];
-     return (
-          <>
-          {/* ------------- Table Here ----------- */}
-          <div class="displayed-table">
-               <Container>
-                    <h1 class="display-6">Members</h1>
-                    <TableFrame columnNames={membersProperties}/>
-               </Container>
-          </div>
-          
-          {/* ------------- Add Form ----------- */}
-          <div class="input-form-group">
+
+function AddMembers (){
+    return(
+        <>
+        <div class="input-form-group">
                <Container >
                     <Card>
                          <Card.Header>Add New Member</Card.Header>
@@ -139,8 +128,8 @@ function Members() {
                     </Card>
                </Container>
           </div>
-          </>
-     )
+        </>
+    )
 }
 
-export default Members;
+export default AddMembers;
