@@ -3,6 +3,12 @@ import TableColumns from './TableColumns';
 import TableRows from './TableRows';
 
 function TableFrame({columnNames, rowData}) {
+ 
+    // {rowData.map((rowData, i) => <tr key={i}>
+    // <td>{rowData.genre_id}</td>
+    // <td>{rowData.genre}</td>
+    //  <td>{rowData.community_url}</td>
+    // </tr>)}
     return (
         <>
         <table class="table table-hover">
@@ -12,12 +18,7 @@ function TableFrame({columnNames, rowData}) {
                 </tr>
             </thead>
             <tbody>
-                {/* Working on making this more modular for every page, not just genre */}
-                {rowData.map((rowData, i) => <tr key={i}>
-                    <td>{rowData.genre_id}</td>
-                    <td>{rowData.genre}</td>
-                    <td>{rowData.community_url}</td>
-                </tr>)}
+                <TableRows rowData={rowData}></TableRows>
             </tbody>
         </table>
         </>

@@ -1,9 +1,13 @@
 import React from 'react';
 
-function TableRows({data}) {
+function TableRows({rowData}) {
     return (
         <>  
-        <td>{data}</td>
+        {rowData.map((row, i) => 
+            <tr key={i}>  
+                {Object.values(row).map((value) => 
+                    <td>{value}</td>)}
+            </tr>)}   
         </>
     ); 
 };

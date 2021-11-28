@@ -1,19 +1,22 @@
 import { React, useState, useEffect } from 'react';
 import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
-import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap';
+import { flipUrl } from '../utils/flipUrl'; 
+
 
 function Genres() {
      const genresProperties = ['genre_id', 'genre', 'community_url'];
-     const [listGenres, setGenres] = useState([])
+     const [listGenres, setGenres] = useState([]);
 
 
 
      useEffect(()=>{
-          Axios.get("http://flip1.engr.oregonstate.edu:5983/genres").then((data)=>{
-          setGenres(data.data)
-          });
-          },[])
+          Axios.get(`${flipUrl()}/genres`)
+               .then((data)=>{
+                    setGenres(data.data);
+               });
+     },[])
 
 
      return (
