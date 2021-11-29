@@ -11,14 +11,22 @@ function Genres() {
      const [title,setTitle] = useState("");
      const [text,setText] = useState("");
 
+     const [genre, setGenre] = useState("")
+     const [communityUrl, setCommunityUrl] = useState("")
+
      useEffect(()=>{
           Axios.get("http://flip2.engr.oregonstate.edu:5983/genres").then((result)=>{
           setGenres(result.data)
           });
           },[])
 
-
      
+     const createGenre = () => {
+          Axios.post('http://flip2.engr.oregonstate.edu:5983/create_genre', 
+          {genre:genre, communityUrl:communityUrl});
+          window.location.reload(false);
+          };
+
 
      return (
           <>
@@ -43,7 +51,7 @@ function Genres() {
                                                   genre
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Control type="text" placeholder="genre" />
+                                                  <Form.Control type="text" placeholder="genre" onChange={(e)=> {setGenre(e.target.value)}} />
                                              </Col>
                                         </Form.Group>
 
@@ -52,13 +60,13 @@ function Genres() {
                                                   community_url
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Control type="url" placeholder="community_url" />
+                                                  <Form.Control type="url" placeholder="community_url" onChange={(e)=> {setCommunityUrl(e.target.value)}} />
                                              </Col>
                                         </Form.Group>
 
                                         <Form.Group as={Row} className="mb-3">
                                              <Col sm={{ span: 10 }}>
-                                                  <Button variant="secondary" type="submit">Add</Button>
+                                                  <Button variant="secondary" onClick={createGenre}>Add</Button>
                                              </Col>
                                         </Form.Group>
                                    </Form>

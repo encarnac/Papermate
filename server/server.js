@@ -106,8 +106,43 @@ app.post('/create_member', (req,res)=> {
     }
 );
 
+app.post('/create_book', (req,res)=> {
+    const isbn = req.body.isbn
+    const title = req.body.title
+    const author_first = req.body.authorFirst
+    const author_last = req.body.authorLast
+    const description = req.body.description
+    const date_published = req.body.datePublished
+    const release_date = req.body.releaseDate
+    const stock = req.body.stock
+
+    const sqlCreateBook = `INSERT INTO Books (isbn, title, author_first, author_last, description, date_published, release_date, stock) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+    const values = [isbn, title, author_first, author_last, description, date_published, release_date, stock]
 
 
+    db.pool.query(sqlCreateBook, values, (err,result)=>{
+        if(err) {
+        console.log(err)
+        } 
+        console.log(result)})
+})
+
+
+app.post('/create_genre', (req,res)=> {
+    const genre = req.body.genre
+    const community_url = req.body.communityUrl
+
+    const sqlCreateGenre = `INSERT INTO Genres (genre, community_url) VALUES (?, ?)`
+    const values = [genre, community_url]
+
+
+    db.pool.query(sqlCreateGenre, values, (err,result)=>{
+        if(err) {
+        console.log(err)
+        } 
+        console.log(result)})
+})
 
 
 
