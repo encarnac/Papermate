@@ -1,22 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { React, useState, useEffect } from 'react';
+import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
 import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bootstrap'
 
 function Reviews() {
      const reviewsProperties = ['review_id', 'member_id', 'isbn', 'date_posted', 'comment', 'rating', 'recommend'];
+     const [listReviews, setReviews] = useState([])
+
+     useEffect(()=>{
+          Axios.get("http://flip2.engr.oregonstate.edu:5983/reviews").then((result)=>{
+          setReviews(result.data)
+          });
+          },[])
+     
+     
      return (
           <>
           {/* ------------- Table Here ----------- */}
-          <div class="displayed-table">
+          <div className="displayed-table">
                <Container>
-                    <h1 class="display-6">Reviews</h1>
-                    <TableFrame columnNames={reviewsProperties}/>
+                    <h1 className="display-6">Reviews</h1>
+                    <TableFrame keys={reviewsProperties} items={listReviews} />
                </Container>
           </div>
 
           {/* ------------- Add Form ----------- */}
-          <div class="input-form-group">
+          <div className="input-form-group">
                          <Container>
                               <Card>
                                    <Card.Header>Add New Review</Card.Header>

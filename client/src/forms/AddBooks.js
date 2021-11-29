@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 function AddBooks() {
     return(
         <>
-        <div class="input-form-group">
+        <div className="input-form-group">
                     <Container>
                             <Card>
                                 <Card.Header>Add New Book</Card.Header>

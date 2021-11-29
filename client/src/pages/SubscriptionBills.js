@@ -1,21 +1,31 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
+import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
 import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bootstrap'
 
 function SubscriptionBills() {
      const subscriptionBillsProperties = ['subscription_id', 'payment_method', 'member_id', 'plan_type', 'order_date', 'expiration_date', 'total', 'order_completed'];
+     const [listSubBills, setSubBills] = useState([])
+     
+     useEffect(()=>{
+          Axios.get("http://flip2.engr.oregonstate.edu:5983/subscription_bills").then((result)=>{
+          setSubBills(result.data)
+          });
+          },[])
+     
+     
      return (
           <>
           {/* ------------- Table Here ----------- */}
-          <div class="displayed-table">
+          <div className="displayed-table">
                <Container>
-                    <h1 class="display-6">Subscription Bills</h1>
-                    <TableFrame columnNames={subscriptionBillsProperties}/>
+                    <h1 className="display-6">Subscription Bills</h1>
+                    <TableFrame keys={subscriptionBillsProperties} items={listSubBills} />
                </Container>
           </div>
 
           {/* ------------- Add Form ----------- */}
-          <div class="input-form-group">
+          <div className="input-form-group">
                <Container>
                     <Card>
                          <Card.Header>Add New Subscription Bill</Card.Header>

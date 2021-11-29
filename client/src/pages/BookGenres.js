@@ -1,21 +1,30 @@
-import React from 'react';
+import {React, useState, useEffect } from 'react';
+import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
 import { Container, Form, Col, Row, Button, Card, FloatingLabel } from 'react-bootstrap'
 
 function BookGenres() {
      const bookGenresProperties = ['book_genres_id', 'genre_id', 'isbn'];
+     const [listBookGenres, setBookGenres] = useState([])
+
+     useEffect(()=>{
+          Axios.get("http://flip2.engr.oregonstate.edu:5983/book_genres").then((result)=>{
+          setBookGenres(result.data)
+          });
+          },[])
+
      return (
           <>
           {/* ------------- Table Here ----------- */}
-          <div class="displayed-table">
+          <div className="displayed-table">
                <Container>
                     <h1 className="display-6">Book Genres</h1>
-                    <TableFrame columnNames={bookGenresProperties}/>
+                    <TableFrame keys={bookGenresProperties} items={listBookGenres} />
                </Container>
           </div>
 
           {/* ------------- Add Form ----------- */}
-          <div class="container justify-content-md-center">
+          <div className="container justify-content-md-center">
                <Container>
                     <Card>
                          <Card.Header>Add Genres to a Book</Card.Header>

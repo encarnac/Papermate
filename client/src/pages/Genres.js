@@ -4,30 +4,34 @@ import TableFrame from '../components/TableFrame';
 import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
 function Genres() {
-     const genresProperties = ['genre_id', 'genre', 'community_url'];
-     const [listGenres, setGenres] = useState([])
-
-
+     const genresProperties = ['genre_id', 'genre', 'community_url']; 
+     const [listGenres, setGenres] = useState([]) 
+     
+     const [userName,setUserName] = useState("");
+     const [title,setTitle] = useState("");
+     const [text,setText] = useState("");
 
      useEffect(()=>{
-          Axios.get("http://flip1.engr.oregonstate.edu:5983/genres").then((data)=>{
-          setGenres(data.data)
+          Axios.get("http://flip2.engr.oregonstate.edu:5983/genres").then((result)=>{
+          setGenres(result.data)
           });
           },[])
 
 
+     
+
      return (
           <>
           {/* ------------- Table Here ----------- */}
-          <div class="displayed-table">
+          <div className="displayed-table">
                <Container>
-                    <h1 class="display-6">Genres</h1>
-                    <TableFrame columnNames={genresProperties} rowData={listGenres} />
+                    <h1 className="display-6">Genres</h1>
+                    <TableFrame keys={genresProperties} items={listGenres} />
                </Container>
           </div>
 
           {/* ------------- Add Form ----------- */}
-          <div class="input-form-group">
+          <div className="input-form-group">
                <Container>
                     <Card>
                          <Card.Header>Add New Genre</Card.Header>
@@ -63,6 +67,8 @@ function Genres() {
                     </Card>
                </Container>
           </div>
+
+          {/* ------------- Add Data Here ----------- */}
 
           </>
      )

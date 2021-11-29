@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bo
 function FilterBooks() {
     return(
         <>
-        <div class="input-form-group">
+        <div className="input-form-group">
                     <Container>
                             <Card className="mb-3">
                                 <Card.Header>Filter Books</Card.Header>

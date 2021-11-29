@@ -1,17 +1,26 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
+import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
 import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bootstrap'
 
 function SubscriptionItems() {
      /* /subscription_items has an extra column for deleting the rows, indicated as the '-' column */
      const subscriptionItemsProperties = ['subscription_tems_id', 'subscription_id', 'isbn', 'quantity', 'book_status', '-'];
+     const [listSubItems, setSubItems] = useState([])
+
+     useEffect(()=>{
+          Axios.get("http://flip2.engr.oregonstate.edu:5983/subscription_items").then((result)=>{
+          setSubItems(result.data)
+          });
+          },[])
+     
      return (
           <>
           {/* ------------- Table Here ----------- */}
-          <div class="displayed-table">
+          <div className="displayed-table">
                <Container>
-                    <h1 class="display-6">Subscription Items</h1>
-                    <TableFrame columnNames={subscriptionItemsProperties}/>
+                    <h1 className="display-6">Subscription Items</h1>
+                    <TableFrame keys={subscriptionItemsProperties} items={listSubItems} />
                </Container>
           </div>
 
@@ -19,7 +28,7 @@ function SubscriptionItems() {
 
 
           {/* ------------- Add Form ----------- */}
-          <div class="input-form-group">
+          <div className="input-form-group">
                <Container>
                     <Card>
                          <Card.Header>Add New Item to a Subscription</Card.Header>
