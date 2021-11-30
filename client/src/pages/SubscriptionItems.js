@@ -5,7 +5,7 @@ import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bo
 
 function SubscriptionItems() {
      /* /subscription_items has an extra column for deleting the rows, indicated as the '-' column */
-     const subscriptionItemsProperties = ['subscription_tems_id', 'subscription_id', 'isbn', 'quantity', 'book_status', '-'];
+     const subscriptionItemsProperties = ['subscription_items_id', 'subscription_id', 'isbn', 'quantity', 'book_status', '-'];
      const [listSubItems, setSubItems] = useState([])
 
      useEffect(()=>{

@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(express.json())
 
 
-// ---- READ : Route to get all rows of a table  ---- 
+// ---------------------------- READ : Route to get all rows of a table  ---------------------------- 
 app.get("/book_genres", (req,res)=>{
     db.pool.query("SELECT * FROM `Book_Genres`", (err,result)=>{
         if(err) {
@@ -53,12 +53,15 @@ app.get("/reviews", (req,res)=>{
         });   });
     
 app.get("/saved_payments", (req,res)=>{
-    db.pool.query("SELECT * FROM `Saved_Payments`", (err,result)=>{
+    db.pool.query("SELECT * FROM `Saved_Payments`; SELECT member_id from Members;", [1,2], (err,result)=>{
         if(err) {
             console.log(err)
             } 
         res.send(result)
-        });   });
+        console.log(result[0])
+        console.log(result[1])
+        });
+    });
         
 app.get("/subscription_bills", (req,res)=>{
     db.pool.query("SELECT * FROM `Subscription_Bills`", (err,result)=>{
@@ -80,7 +83,7 @@ app.get("/subscription_items", (req,res)=>{
 
 
 
-// ---- CREATE : Route to insert rows into a table  ---- 
+// ---------------------------- CREATE : Routes to insert rows into a table  ---------------------------- 
 app.post('/create_member', (req,res)=> {
     const first_name = req.body.firstName
     const last_name = req.body.lastName
@@ -143,6 +146,74 @@ app.post('/create_genre', (req,res)=> {
         } 
         console.log(result)})
 })
+
+app.post('/create_saved_payment', (req, res) => {
+    const member_id = req.body.memberId
+    const cc_name = req.body.ccName
+    const cc_num = req.body.ccNum
+    const cc_exp = req.body.ccExp
+    const cc_cvc = req.body.ccCVC
+
+    const sqlCreateSavedPayment = `INSERT INTO Saved_Payments (member_id, cc_name, cc_num, cc_exp, cc_cvc) VALUES (?, ?, ?, ?, ?)`
+    const values = [member_id, cc_name, cc_num, cc_exp, cc_cvc]
+
+    db.pool.query(sqlCreateSavedPayment, values, (err,result)=>{
+        if(err) {
+        console.log(err)
+        } 
+        console.log(result)})
+})
+
+
+
+
+// ---------------------------- DELETE : Routes to delete rows into a table  ---------------------------- 
+
+app.delete(`/saved_payments/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeletePayment = `DELETE FROM Saved_Payments WHERE payment_method = ?;`
+
+    db.pool.query(sqlDeletePayment, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+
+app.delete(`/book_genres/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeletePayment = `DELETE FROM Book_Genres WHERE book_genres_id = ?;`
+
+    db.pool.query(sqlDeletePayment, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+
+
+
+
+
+// Route to delete a post
+
+// app.delete('/api/delete/:id',(req,res)=>{
+// const id = req.params.id;
+
+// db.query("DELETE FROM posts WHERE id= ?", id, (err,result)=>{
+// if(err) {
+// console.log(err)
+//         } }) })
+
+
 
 
 

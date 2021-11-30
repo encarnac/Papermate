@@ -13,13 +13,18 @@ function BookGenres() {
           });
           },[])
 
+     
+     const onDelete = (_id) => {
+          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/book_genres/${_id}`)
+          }
+
      return (
           <>
           {/* ------------- Table Here ----------- */}
           <div className="displayed-table">
                <Container>
                     <h1 className="display-6">Book Genres</h1>
-                    <TableFrame keys={bookGenresProperties} items={listBookGenres} />
+                    <TableFrame keys={bookGenresProperties} items={listBookGenres} onDelete={onDelete} />
                </Container>
           </div>
 

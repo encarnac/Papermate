@@ -2,7 +2,7 @@ import React from 'react';
 import TableColumns from './TableColumns';
 import TableRows from './TableRows';
 
-function TableFrame({keys, items}) {
+function TableFrame({keys, items, onDelete}) {
 
 
     return (
@@ -14,7 +14,7 @@ function TableFrame({keys, items}) {
                     </tr>
                 </thead> 
                 <tbody>
-                    {items.map((row, index)=> <tr key={index}><TableRows index={index} data={row} keys={keys}/></tr>)}
+                    <TableRows rowData={items} onDelete={onDelete} />
                 </tbody>
             </table>
             </>
