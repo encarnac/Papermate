@@ -6,8 +6,10 @@ const pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'classmysql.engr.oregonstate.edu',
     user            : 'cs340_encarnac',
-    password        : 'p1neappleexperience',
-    database        : 'cs340_encarnac'
+    password        : '',
+    database        : 'cs340_encarnac',
+    multipleStatements : true
+
 })
 
 // Export it for use in our application

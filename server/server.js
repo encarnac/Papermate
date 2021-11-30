@@ -53,12 +53,15 @@ app.get("/reviews", (req,res)=>{
         });   });
     
 app.get("/saved_payments", (req,res)=>{
-    db.pool.query("SELECT * FROM `Saved_Payments`", (err,result)=>{
+    db.pool.query("SELECT * FROM `Saved_Payments`; SELECT member_id from Members;", [1,2], (err,result)=>{
         if(err) {
             console.log(err)
             } 
         res.send(result)
-        });   });
+        console.log(result[0])
+        console.log(result[1])
+        });
+    });
         
 app.get("/subscription_bills", (req,res)=>{
     db.pool.query("SELECT * FROM `Subscription_Bills`", (err,result)=>{
@@ -138,6 +141,23 @@ app.post('/create_genre', (req,res)=> {
 
 
     db.pool.query(sqlCreateGenre, values, (err,result)=>{
+        if(err) {
+        console.log(err)
+        } 
+        console.log(result)})
+})
+
+app.post('/create_saved_payment', (req, res) => {
+    const member_id = req.body.memberId
+    const cc_name = req.body.ccName
+    const cc_num = req.body.ccNum
+    const cc_exp = req.body.ccExp
+    const cc_cvc = req.body.ccCVC
+
+    const sqlCreateSavedPayment = `INSERT INTO Saved_Payments (member_id, cc_name, cc_num, cc_exp, cc_cvc) VALUES (?, ?, ?, ?, ?)`
+    const values = [member_id, cc_name, cc_num, cc_exp, cc_cvc]
+
+    db.pool.query(sqlCreateSavedPayment, values, (err,result)=>{
         if(err) {
         console.log(err)
         } 
