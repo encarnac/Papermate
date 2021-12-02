@@ -9,8 +9,8 @@ function HomePage() {
           <Container >
                {/* Row for the page title and short description */}
                <Row>
-               <h1 class="display-6">Papermate</h1>
-               <small class="text-muted">An online book subscription service</small>
+               <h1 className="display-6">Papermate</h1>
+               <small className="text-muted">An online book subscription service</small>
                </Row>
 
                {/* Row of Three Cards for Members, Saved Payments, and Subscription Bills */}
@@ -24,7 +24,7 @@ function HomePage() {
                                    <p>member_id, first_name, last_name, email, phone_number, address_line, address_line_2, state, city, postal_code, auto_renew</p>
                               </Card.Text>
                               <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/members">Manage</Link>
+                                   <Link className="text-link" to="/members">Manage</Link>
                               </Button>
                          </Card.Body>
                     </Card>
@@ -36,7 +36,7 @@ function HomePage() {
                                    <p>payment_method, member_id, cc_name, cc_num, cc_exp, cc_cvc</p>
                               </Card.Text>
                               <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/saved_payments">Manage</Link>
+                                   <Link className="text-link" to="/saved_payments">Manage</Link>
                               </Button>
                          </Card.Body>
                     </Card>
@@ -48,7 +48,7 @@ function HomePage() {
                                    <p>subscription_id, payment_method, member_id, plan_type, order_date, expiration_date, total, order_completed</p>
                               </Card.Text>
                               <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/subscription_bills">Manage</Link>
+                                   <Link className="text-link" to="/subscription_bills">Manage</Link>
                               </Button>
                          </Card.Body>
                     </Card>
@@ -66,7 +66,7 @@ function HomePage() {
                                    <p>isbn, title, author_first, author_last, description, date_published, release_date, avg_rating, stock</p>
                               </Card.Text>
                               <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/books">Manage</Link>
+                                   <Link className="text-link" to="/books">Manage</Link>
                               </Button>
                          </Card.Body>
                     </Card>
@@ -78,7 +78,7 @@ function HomePage() {
                                    <p>book_genres_id, genre_id, isbn</p>
                               </Card.Text>
                               <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/book_genres">Manage</Link>
+                                   <Link className="text-link" to="/book_genres">Manage</Link>
                               </Button>
                          </Card.Body>
                     </Card>
@@ -90,7 +90,7 @@ function HomePage() {
                                    <p>genre_id, genre, community_url</p>
                               </Card.Text>
                               <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/genres">Manage</Link>
+                                   <Link className="text-link" to="/genres">Manage</Link>
                               </Button>
                          </Card.Body>
                     </Card>
@@ -110,7 +110,7 @@ function HomePage() {
                                         <p>review_id, member_id, isbn, date_posted, comment, rating, recommend</p>
                                    </Card.Text>
                                    <Button variant="secondary" size="sm">
-                                   <Link class="text-link" to="/reviews">Manage</Link>
+                                   <Link className="text-link" to="/reviews">Manage</Link>
                               </Button>
                               </Card.Body>
                          </Card>

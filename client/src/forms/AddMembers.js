@@ -1,11 +1,34 @@
-import React from 'react';
+import { React, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
 import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
 
 function AddMembers (){
+
+     const [firstName, setFirstName] = useState('')
+     const [lastName, setLastName] = useState('')
+     const [email, setEmail] = useState('')
+     const [phoneNumber, setPhoneNumber] = useState('')
+     const [addressLine, setAddressLine] = useState('')
+     const [addressLine2, setAddressLine2] = useState('')
+     const [state, setState] = useState('')
+     const [city, setCity] = useState('')
+     const [postalCode, setPostalCode] = useState('')
+     const [autoRenew, setAutoRenew] = useState('')
+
+     
+
+     const createMember = () => {
+          Axios.post('http://flip2.engr.oregonstate.edu:5983/create_member', 
+          {firstName: firstName, lastName: lastName, email:email, phoneNumber:phoneNumber, addressLine:addressLine, addressLine2:addressLine2, state:state, city:city, postalCode:postalCode, autoRenew:autoRenew});
+          window.location.reload(false);
+          };
+
+
     return(
         <>
-        <div class="input-form-group">
+        <div className="input-form-group">
                <Container >
                     <Card>
                          <Card.Header>Add New Member</Card.Header>
@@ -14,50 +37,50 @@ function AddMembers (){
                                    <Form>
                                         <Row className="mb-3">
                                              <Form.Group as={Col} >
-                                                  <Form.Label class="align-left">first_name</Form.Label>
-                                                  <Form.Control type="text" placeholder="first_name" />
+                                                  <Form.Label>first_name</Form.Label>
+                                                  <Form.Control type="text" placeholder="first_name" onChange={(e)=> {setFirstName(e.target.value)}} />
                                              </Form.Group>
 
                                              <Form.Group as={Col} >
                                                   <Form.Label>last_name</Form.Label>
-                                                  <Form.Control type="text" placeholder="last_name" />
+                                                  <Form.Control type="text" placeholder="last_name" onChange={(e)=> {setLastName(e.target.value)}} />
                                              </Form.Group>
                                         </Row>
                                         <Row className="mb-3">
                                              <Form.Group as={Col} >
                                                   <Form.Label>email</Form.Label>
-                                                  <Form.Control type="email" placeholder="email" />
+                                                  <Form.Control type="email" placeholder="email" onChange={(e)=> {setEmail(e.target.value)}} />
                                              </Form.Group>
                                         </Row>
 
                                         <Row className="mb-3">
                                              <Form.Group as={Col} >
                                                   <Form.Label>phone_number</Form.Label>
-                                                  <Form.Control type="tel" placeholder="phone_number" />
+                                                  <Form.Control type="tel" placeholder="phone_number" onChange={(e)=> {setPhoneNumber(e.target.value)}} />
                                              </Form.Group>
                                         </Row>
 
                                         <Row className="mb-3">
                                              <Form.Group >
                                                   <Form.Label>address_line</Form.Label>
-                                                  <Form.Control  type="text"placeholder="1234 Main St" />
+                                                  <Form.Control  type="text"placeholder="address_line" onChange={(e)=> {setAddressLine(e.target.value)}} />
                                              </Form.Group>
 
                                              <Form.Group >
                                                   <Form.Label>address_line_2</Form.Label>
-                                                  <Form.Control type="text" placeholder="Apartment, studio, or floor" />
+                                                  <Form.Control type="text" placeholder="address_line_2" onChange={(e)=> {setAddressLine2(e.target.value)}} />
                                              </Form.Group>
                                         </Row>
 
                                         <Row className="mb-3">
                                              <Form.Group as={Col} >
                                                   <Form.Label>city</Form.Label>
-                                                  <Form.Control type="text" placeholder="city"/>
+                                                  <Form.Control type="text" placeholder="city" onChange={(e)=> {setCity(e.target.value)}} />
                                              </Form.Group>
 
                                              <Form.Group as={Col}>
                                                   <Form.Label>state</Form.Label>
-                                                  <Form.Select defaultValue="Choose State">
+                                                  <Form.Select defaultValue="Choose State" onChange={(e)=> {setState(e.target.value)}}>
                                                   <option value="">Choose State</option>
                                                   <option value="AL">AL</option>
                                                   <option value="AK">AK</option>
@@ -115,11 +138,26 @@ function AddMembers (){
 
                                              <Form.Group as={Col} >
                                                   <Form.Label>postal_code</Form.Label>
-                                                  <Form.Control type="text" placeholder="postal_code" />
+                                                  <Form.Control type="text" placeholder="postal_code" onChange={(e)=> {setPostalCode(e.target.value)}} />
                                              </Form.Group>
                                         </Row>
 
-                                        <Button variant="primary" type="submit">
+                                        <Row>
+                                        <Col></Col>
+                                             <Form.Group as={Col} >
+                                                       <Form.Label>
+                                                            auto_renew
+                                                       </Form.Label>
+                                                       <Form.Select className=" mb-3" onChange={(e)=> {setAutoRenew(e.target.value)}} >
+                                                            <option>auto_renew</option>
+                                                            <option value="0">False</option>
+                                                            <option value="1">True</option>
+                                                       </Form.Select>
+                                             </Form.Group>
+                                        <Col></Col>
+                                        </Row>
+
+                                        <Button variant="primary"onClick={createMember}>
                                              Add
                                         </Button>
                                    </Form>

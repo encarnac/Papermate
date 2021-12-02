@@ -1,10 +1,28 @@
-import React from 'react';
+import { React, useState } from 'react';
+import Axios from 'axios';
 import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
 function AddBooks() {
+    const [isbn, setIsbn] = useState('')
+    const [title, setTitle] = useState('')
+    const [authorFirst, setAuthorFirst] = useState('')
+    const [authorLast, setAuthorLast] = useState('')
+    const [description, setDescription] = useState('')
+    const [datePublished, setDatePublished] = useState('')
+    const [releaseDate, setReleaseDate] = useState('')
+    const [stock, setStock] = useState('')
+
+
+    const createBook = () => {
+        Axios.post('http://flip2.engr.oregonstate.edu:5983/create_book', 
+        {isbn:isbn, title: title, authorFirst:authorFirst, authorLast:authorLast, description:description, datePublished:datePublished, releaseDate:releaseDate, stock:stock});
+        window.location.reload(false);
+        };
+
+
     return(
         <>
-        <div class="input-form-group">
+        <div className="input-form-group">
                     <Container>
                             <Card>
                                 <Card.Header>Add New Book</Card.Header>
@@ -16,7 +34,16 @@ function AddBooks() {
                                                         isbn
                                                     </Form.Label>
                                                     <Col sm={10}>
-                                                        <Form.Control type="text" placeholder="isbn" />
+                                                        <Form.Control type="text" placeholder="isbn" onChange={(e)=> {setIsbn(e.target.value)}} />
+                                                    </Col>
+                                                </Form.Group>
+
+                                                <Form.Group as={Row} className="mb-3">
+                                                    <Form.Label column sm={2}>
+                                                        title
+                                                    </Form.Label>
+                                                    <Col sm={10}>
+                                                        <Form.Control type="text" placeholder="title" onChange={(e)=> {setTitle(e.target.value)}} />
                                                     </Col>
                                                 </Form.Group>
 
@@ -25,7 +52,7 @@ function AddBooks() {
                                                         author_first
                                                     </Form.Label>
                                                     <Col sm={10}>
-                                                        <Form.Control type="text" placeholder="author_first" />
+                                                        <Form.Control type="text" placeholder="author_first" onChange={(e)=> {setAuthorFirst(e.target.value)}} />
                                                     </Col>
                                                 </Form.Group>
 
@@ -35,16 +62,7 @@ function AddBooks() {
                                                         author_last
                                                     </Form.Label>
                                                     <Col sm={10}>
-                                                        <Form.Control type="text" placeholder="author_last" />
-                                                    </Col>
-                                                </Form.Group>
-
-                                                <Form.Group as={Row} className="mb-3" controlId="release_dateId">
-                                                    <Form.Label column sm={2}>
-                                                        release_date
-                                                    </Form.Label>
-                                                    <Col sm={10}>
-                                                        <Form.Control type="date"/>
+                                                        <Form.Control type="text" placeholder="author_last" onChange={(e)=> {setAuthorLast(e.target.value)}} />
                                                     </Col>
                                                 </Form.Group>
 
@@ -53,7 +71,16 @@ function AddBooks() {
                                                         date_published
                                                     </Form.Label>
                                                     <Col sm={10}>
-                                                        <Form.Control type="date"/>
+                                                        <Form.Control type="date" onChange={(e)=> {setDatePublished(e.target.value)}} />
+                                                    </Col>
+                                                </Form.Group>
+
+                                                <Form.Group as={Row} className="mb-3" controlId="release_dateId">
+                                                    <Form.Label column sm={2}>
+                                                        release_date
+                                                    </Form.Label>
+                                                    <Col sm={10}>
+                                                        <Form.Control type="date" onChange={(e)=> {setReleaseDate(e.target.value)}} />
                                                     </Col>
                                                 </Form.Group>
 
@@ -65,7 +92,8 @@ function AddBooks() {
                                                         <Form.Control
                                                         placeholder="description"
                                                         style={{ height: '100px' }} 
-                                                        as="textarea"/>
+                                                        as="textarea"
+                                                        onChange={(e)=> {setDescription(e.target.value)}} />
                                                     </Col>
                                                 </Form.Group>
 
@@ -74,13 +102,13 @@ function AddBooks() {
                                                         stock
                                                     </Form.Label>
                                                     <Col sm={10}>
-                                                        <Form.Control type="number" placeholder="stock" />
+                                                        <Form.Control type="number" placeholder="stock" onChange={(e)=> {setStock(e.target.value)}} />
                                                     </Col>
                                                 </Form.Group>
 
                                                 <Form.Group as={Row} className="mb-3">
                                                     <Col sm={{ span: 10 }}>
-                                                        <Button variant="secondary" type="submit">Add</Button>
+                                                        <Button variant="secondary" onClick={createBook} >Add</Button>
                                                     </Col>
                                                 </Form.Group>
                                         </Form>
