@@ -1,14 +1,14 @@
 const express = require('express');
-const db = require('./db')
+const db = require('./db');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
 
 const app = express();
-const  PORT = 5983;
+const PORT = 5983;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.json())
+app.use(express.json());
 
 
 // ---------------------------- READ : Route to get all rows of a table  ---------------------------- 
@@ -31,17 +31,17 @@ app.get("/books", (req,res)=>{
 app.get("/genres", (req,res)=>{
 db.pool.query("SELECT * FROM Genres", (err,result)=>{
     if(err) {
-        console.log(err)
+        console.log(err);
         } 
-    res.send(result)
+    res.send(result);
     });   });
 
 app.get("/members", (req,res)=>{
     db.pool.query("SELECT * FROM Members", (err,result)=>{
         if(err) {
-            console.log(err)
+            console.log(err);
             } 
-        res.send(result)
+        res.send(result);
         });   });
 
 app.get("/reviews", (req,res)=>{

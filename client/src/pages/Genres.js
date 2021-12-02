@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
-import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap';
+import { flipUrl } from '../utils/flipUrl'; 
+
 
 function Genres() {
      const genresProperties = ['genre_id', 'genre', 'community_url']; 
@@ -19,7 +21,6 @@ function Genres() {
           setGenres(result.data)
           });
           },[])
-
      
      const createGenre = () => {
           Axios.post('http://flip2.engr.oregonstate.edu:5983/create_genre', 

@@ -3,8 +3,6 @@ import TableColumns from './TableColumns';
 import TableRows from './TableRows';
 
 function TableFrame({keys, items, onDelete}) {
-
-
     return (
             <>
             <table className="table table-hover">
