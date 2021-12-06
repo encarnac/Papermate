@@ -24,8 +24,8 @@ function BookGenres() {
      }
 
      const onDelete = (_id) => {
-          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/book_genres/${_id}`)
-          }
+          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/book_genres/${_id}`);
+     };
 
      return (
           <>

@@ -28,6 +28,9 @@ function Genres() {
           window.location.reload(false);
           };
 
+     const onDelete = (_id) => {
+          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/genres/${_id}`);
+          }
 
      return (
           <>
@@ -35,7 +38,7 @@ function Genres() {
           <div className="displayed-table">
                <Container>
                     <h1 className="display-6">Genres</h1>
-                    <TableFrame keys={genresProperties} items={listGenres} />
+                    <TableFrame keys={genresProperties} items={listGenres} onDelete={onDelete} />
                </Container>
           </div>
 

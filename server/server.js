@@ -257,7 +257,6 @@ app.delete(`/saved_payments/:_id`, (req, res) =>{
     })
 })
 
-
 app.delete(`/book_genres/:_id`, (req, res) =>{
     const key = req.params._id;
     
@@ -286,7 +285,6 @@ app.delete(`/members/:_id`, (req, res) =>{
     })
 })
 
-
 app.delete(`/delete_books/:_id`, (req, res) =>{
     const key = req.params._id;
     
@@ -301,6 +299,61 @@ app.delete(`/delete_books/:_id`, (req, res) =>{
     })
 })
 
+app.delete(`/subscription_bills/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeleteSubscriptionBill = `DELETE FROM Subscription_Bills WHERE subscription_id = ?;`
+
+    db.pool.query(sqlDeleteSubscriptionBill, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+app.delete(`/subscription_items/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeleteSubscriptionItem = `DELETE FROM Subscription_Items WHERE subscription_items_id = ?;`
+
+    db.pool.query(sqlDeleteSubscriptionItem, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+app.delete(`/genres/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeleteGenre = `DELETE FROM Genres WHERE genre_id = ?;`
+
+    db.pool.query(sqlDeleteGenre, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+app.delete(`/reivews/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeleteReview = `DELETE FROM Review WHERE review_id = ?;`
+
+    db.pool.query(sqlDeleteReview, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
 
 
 // ---------------------------- UPDATE : Routes to update rows into a table  ---------------------------- 

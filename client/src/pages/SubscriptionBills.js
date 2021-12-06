@@ -29,17 +29,19 @@ function SubscriptionBills() {
           {paymentMethodFK: paymentMethodFK, memberIdFK: memberIdFK, planType: planType, orderDate: orderDate, expirationDate: expirationDate,
           total: total, orderCompleted:orderCompleted});
           window.location.reload(false);
-     }
+     };
      
-     
-     // Form.Select className=" mb-3" onChange={(e)=> {setAutoRenew(e.target.value)} value =query
+     const onDelete = (_id) => {
+          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/subscription_bills/${_id}`);
+     };
+
      return (
           <>
           {/* ------------- Table Here ----------- */}
           <div className="displayed-table">
                <Container>
                     <h1 className="display-6">Subscription Bills</h1>
-                    <TableFrame keys={subscriptionBillsProperties} items={listSubBills} />
+                    <TableFrame keys={subscriptionBillsProperties} items={listSubBills} onDelete={onDelete} />
                </Container>
           </div>
 

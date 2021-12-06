@@ -26,6 +26,10 @@ function Reviews() {
           {memberIdFK: memberIdFK, isbnFK: isbnFK, datePosted: datePosted, comment: comment, rating: rating, recommend: recommend});
           window.location.reload(false);
      }
+
+     const onDelete = (_id) => {
+          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/reviews/${_id}`);
+     }
      
      return (
           <>
@@ -33,7 +37,7 @@ function Reviews() {
           <div className="displayed-table">
                <Container>
                     <h1 className="display-6">Reviews</h1>
-                    <TableFrame keys={reviewsProperties} items={listReviews} />
+                    <TableFrame keys={reviewsProperties} items={listReviews} onDelete={onDelete} />
                </Container>
           </div>
 

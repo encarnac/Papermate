@@ -24,8 +24,11 @@ function SubscriptionItems() {
           Axios.post("http://flip2.engr.oregonstate.edu:5983/create_subscription_item", 
           {subscriptionIdFK: subscriptionIdFK, isbnFK: isbnFK, quantity: quantity, bookStatus: bookStatus});
      window.location.reload(false);
-     }
-    
+     };
+
+     const onDelete = (_id) => {
+          Axios.delete(`http://flip2.engr.oregonstate.edu:5983/subscription_items/${_id}`);
+     };
 
      return (
           <>
@@ -33,7 +36,7 @@ function SubscriptionItems() {
           <div className="displayed-table">
                <Container>
                     <h1 className="display-6">Subscription Items</h1>
-                    <TableFrame keys={subscriptionItemsProperties} items={listSubItems} />
+                    <TableFrame keys={subscriptionItemsProperties} items={listSubItems} onDelete={onDelete} />
                </Container>
           </div>
 
