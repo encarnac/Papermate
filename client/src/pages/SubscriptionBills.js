@@ -1,19 +1,38 @@
 import { React, useState, useEffect } from 'react';
 import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
-import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card, Form, FloatingLabel } from 'react-bootstrap';
+import SelectOption from '../components/SelectOption';
 
 function SubscriptionBills() {
      const subscriptionBillsProperties = ['subscription_id', 'payment_method', 'member_id', 'plan_type', 'order_date', 'expiration_date', 'total', 'order_completed'];
-     const [listSubBills, setSubBills] = useState([])
+     const [listSubBills, setSubBills] = useState([]);
+     const [paymentMethodFK, setPaymentMethodFK] = useState([]);
+     const [memberIdFK, setMemberIdFK] = useState([]);
      
      useEffect(()=>{
           Axios.get("http://flip2.engr.oregonstate.edu:5983/subscription_bills").then((result)=>{
-          setSubBills(result.data)
+          setSubBills(result.data[0]);
+          setPaymentMethodFK(result.data[1]);
+          setMemberIdFK(result.data[2]);
           });
-          },[])
+          },[]);
+
+     const [planType, setPlanType] = useState('');
+     const [orderDate, setOrderDate] = useState('');
+     const [expirationDate, setExpirationDate] = useState('');
+     const [total, setTotal] = useState('');
+     const [orderCompleted, setOrderCompleted] = useState('');
+
+     const createSubscriptionBill = () => {
+          Axios.post("http://flip2.engr.oregonstate.edu:5983/create_subscription_bill", 
+          {paymentMethodFK: paymentMethodFK, memberIdFK: memberIdFK, planType: planType, orderDate: orderDate, expirationDate: expirationDate,
+          total: total, orderCompleted:orderCompleted});
+          window.location.reload(false);
+     }
      
      
+     // Form.Select className=" mb-3" onChange={(e)=> {setAutoRenew(e.target.value)} value =query
      return (
           <>
           {/* ------------- Table Here ----------- */}
@@ -37,11 +56,9 @@ function SubscriptionBills() {
                                                   payment_method
                                              </Form.Label>
                                              <FloatingLabel className="col-sm-10 mb-3" controlId="floatingSelect" label="payment_method from Saved_Payments">
-                                                  <Form.Select>
-                                                       <option>payment_method</option>
-                                                       <option value="1">One</option>
-                                                       <option value="2">Two</option>
-                                                       <option value="3">Three</option>
+                                                  <Form.Select defaultValue="" onChange={(e)=> {setPaymentMethodFK(e.target.value)}}>
+                                                       <option value=""></option>
+                                                       <SelectOption data={paymentMethodFK} />
                                                   </Form.Select>
                                              </FloatingLabel>
                                         </Form.Group>
@@ -51,11 +68,9 @@ function SubscriptionBills() {
                                                   member_id
                                              </Form.Label>
                                              <FloatingLabel className="col-sm-10 mb-3" controlId="floatingSelect" label="member_id from Members">
-                                                  <Form.Select>
-                                                       <option>member_id</option>
-                                                       <option value="1">One</option>
-                                                       <option value="2">Two</option>
-                                                       <option value="3">Three</option>
+                                                  <Form.Select defaultValue="" onChange={(e)=> {setMemberIdFK(e.target.value)}}>
+                                                       <option value=""></option>
+                                                       <SelectOption data={memberIdFK} />
                                                   </Form.Select>
                                              </FloatingLabel>
                                         </Form.Group>
@@ -65,7 +80,7 @@ function SubscriptionBills() {
                                                   plan_type
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Select className="mb-3">
+                                                  <Form.Select className="mb-3" onChange={(e)=> {setPlanType(e.target.value)}}>
                                                        <option>plan_type</option>
                                                        <option value="1">Tier 1</option>
                                                        <option value="2">Tier 2</option>
@@ -83,7 +98,7 @@ function SubscriptionBills() {
                                                   order_date
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Control type="date"/>
+                                                  <Form.Control type="date" onChange={(e)=> {setOrderDate(e.target.value)}}/>
                                              </Col>
                                         </Form.Group>
 
@@ -92,7 +107,7 @@ function SubscriptionBills() {
                                                   expiration_date
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Control type="date" />
+                                                  <Form.Control type="date" onChange={(e)=> {setExpirationDate(e.target.value)}}/>
                                              </Col>
                                         </Form.Group>
 
@@ -101,7 +116,7 @@ function SubscriptionBills() {
                                                   total
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Control type="number" placeholder="total" />
+                                                  <Form.Control type="number" placeholder="total" onChange={(e)=> {setTotal(e.target.value)}} />
                                              </Col>
                                         </Form.Group>
 
@@ -110,17 +125,16 @@ function SubscriptionBills() {
                                                   order_completed
                                              </Form.Label>
                                              <Col sm={10}>
-                                                  <Form.Select className="mb-3">
-                                                       <option>order_completed</option>
-                                                       <option value="0">False</option>
-                                                       <option value="1">True</option>
+                                                  <Form.Select className="mb-3" onChange={(e)=> {setOrderCompleted(e.target.value)}}>
+                                                       <option value=""></option>
+                                                       <SelectOption data={orderCompleted}/>                                                       
                                                   </Form.Select>
                                              </Col>
                                         </Form.Group>
 
                                         <Form.Group as={Row} className="mb-3">
                                              <Col sm={{ span: 10 }}>
-                                                  <Button variant="secondary" type="submit">Add</Button>
+                                                  <Button variant="secondary" type="submit" onClick={createSubscriptionBill}>Add</Button>
                                              </Col>
                                         </Form.Group>
                                    </Form>

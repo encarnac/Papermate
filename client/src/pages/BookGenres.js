@@ -2,6 +2,7 @@ import {React, useState, useEffect } from 'react';
 import Axios from 'axios';
 import TableFrame from '../components/TableFrame';
 import { Container, Form, Col, Row, Button, Card, FloatingLabel } from 'react-bootstrap'
+import SelectOption from '../components/SelectOption';
 
 function BookGenres() {
      const bookGenresProperties = ['book_genres_id', 'genre_id', 'isbn'];
@@ -13,7 +14,15 @@ function BookGenres() {
           });
           },[])
 
-     
+     const [genreIdFK, setGenreIdFK] = useState('');
+     const [isbnFK, setIsbnFK] = useState('');     
+
+     const createBookGenre = () => {
+          Axios.post("http://flip2.engr.oregonstate.edu:5983/create_book_genre", 
+          {genreIdFK: genreIdFK, isbnFK: isbnFK});
+          window.location.reload(false);
+     }
+
      const onDelete = (_id) => {
           Axios.delete(`http://flip2.engr.oregonstate.edu:5983/book_genres/${_id}`)
           }
@@ -37,26 +46,22 @@ function BookGenres() {
                               <Card.Text>
                                    <Form>
                                         <FloatingLabel className="mb-3" controlId="floatingSelect" label="genre_id from Genres">
-                                             <Form.Select aria-label="Floating label select example">
-                                                  <option>SELLECT genre_id FROM Genres</option>
-                                                  <option value="1">One</option>
-                                                  <option value="2">Two</option>
-                                                  <option value="3">Three</option>
+                                             <Form.Select aria-label="Floating label select example" onChange={(e)=> {setGenreIdFK(e.target.value)}}>
+                                                  <option value=""></option>             
+                                                  <SelectOption data={genreIdFK} />
                                              </Form.Select>
                                         </FloatingLabel>
 
                                         <FloatingLabel className="mb-3" controlId="floatingSelect" label="isbn from Books">
-                                             <Form.Select aria-label="Floating label select example">
-                                                  <option>SELLECT isbn FROM Books</option>
-                                                  <option value="1">One</option>
-                                                  <option value="2">Two</option>
-                                                  <option value="3">Three</option>
+                                             <Form.Select aria-label="Floating label select example" onChange={(e)=> {setIsbnFK(e.target.value)}}>
+                                                  <option value=""></option>
+                                                  <SelectOption data={isbnFK} />
                                              </Form.Select>
                                         </FloatingLabel>
 
                                         <Form.Group as={Row} className="mb-3">
                                              <Col sm={{ span: 10 }}>
-                                                  <Button variant="secondary" type="submit">Add</Button>
+                                                  <Button variant="secondary" type="submit" onClick={createBookGenre}>Add</Button>
                                              </Col>
                                         </Form.Group>
                                    </Form>

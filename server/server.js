@@ -1,14 +1,14 @@
 const express = require('express');
-const db = require('./db');
+const db = require('./db')
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors')
 
 const app = express();
 const PORT = 5983;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.json());
+app.use(express.json())
 
 
 // ---------------------------- READ : Route to get all rows of a table  ---------------------------- 
@@ -31,17 +31,17 @@ app.get("/books", (req,res)=>{
 app.get("/genres", (req,res)=>{
 db.pool.query("SELECT * FROM Genres", (err,result)=>{
     if(err) {
-        console.log(err);
+        console.log(err)
         } 
-    res.send(result);
+    res.send(result)
     });   });
 
 app.get("/members", (req,res)=>{
     db.pool.query("SELECT * FROM Members", (err,result)=>{
         if(err) {
-            console.log(err);
+            console.log(err)
             } 
-        res.send(result);
+        res.send(result)
         });   });
 
 app.get("/reviews", (req,res)=>{
@@ -51,32 +51,37 @@ app.get("/reviews", (req,res)=>{
             } 
         res.send(result)
         });   });
-    
+
+
+
 app.get("/saved_payments", (req,res)=>{
+    // Write an extra SQL query to get the primary keys of an external table (separate w/ ';')
+    // Depending on how many dynamic dropdowns needed for the page, create a list like below `[1, 2]` 
+    // -- in my case I only needed 2 queries in all (I forgot why it starts with 1 and not 0 btw lol)
     db.pool.query("SELECT * FROM `Saved_Payments`; SELECT member_id from Members;", [1,2], (err,result)=>{
         if(err) {
             console.log(err)
             } 
         res.send(result)
-        console.log(result[0])
-        console.log(result[1])
+        console.log(result[0]) // this is just so I know how to index it when I'm viewing the results from the front-end
+        console.log(result[1]) 
         });
     });
         
 app.get("/subscription_bills", (req,res)=>{
-    db.pool.query("SELECT * FROM `Subscription_Bills`", (err,result)=>{
+    db.pool.query("SELECT * FROM `Subscription_Bills`; SELECT payment_method FROM `Saved_Payments`; SELECT member_id FROM `Members`;", [1,2,3], (err,result)=>{
         if(err) {
-            console.log(err)
+            console.log(err);
             } 
-        res.send(result)
+        res.send(result);
         });   });
 
 app.get("/subscription_items", (req,res)=>{
-    db.pool.query("SELECT * FROM `Subscription_Items`", (err,result)=>{
+    db.pool.query("SELECT * FROM `Subscription_Items`; SELECT subscription_id FROM `Subscription_Bills`; SELECT isbn FROM `Books`;", [1,2,3], (err,result)=>{
         if(err) {
-            console.log(err)
+            console.log(err);
             } 
-        res.send(result)
+        res.send(result);
         });   });
 
 
@@ -164,6 +169,75 @@ app.post('/create_saved_payment', (req, res) => {
         console.log(result)})
 })
 
+app.post('/create_subscription_bill', (req, res) => {
+    const payment_method = req.body.paymentMethodFK;
+    const member_id = req.body.memberIdFK;
+    const plan_type = req.body.planType;
+    const order_date = req.body.orderDate;
+    const expiration_date = req.body.expirationDate;
+    const total = req.body.total;
+    const order_completed = req.body.orderCompleted;
+
+    const sqlCreateSubscriptionBill = 
+        `INSERT INTO Subscription_Bills (payment_method, member_id, plan_type, order_date, expiration_date, total, order_completed) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const values = [payment_method, member_id, plan_type, order_date, expiration_date, total, order_completed];
+
+    db.pool.query(sqlCreateSubscriptionBill, values, (err,result)=>{
+        if(err) {
+        console.log(err);
+        } 
+        console.log(result)});
+});
+
+app.post('/create_subscription_item', (req, res) => {
+    const subscription_id = req.body.subscriptionIdFK;
+    const isbn = req.body.isbnFK;
+    const quantity = req.body.quantity;
+    const book_status = req.body.bookStatus;
+
+    const sqlCreateSubscriptionItem = `INSERT INTO Subscription_Items (subscription_id, isbn, quantity, book_status) VALUES (?, ?, ?, ?)`;
+    const values = [subscription_id, isbn, quantity, book_status];
+
+    db.pool.query(sqlCreateSubscriptionItem, values, (err,result)=>{
+        if(err) {
+        console.log(err);
+        } 
+        console.log(result)});
+});
+
+app.post('/create_book_genre', (req, res) => {
+    const genre_id = req.body.genreIdFK;
+    const isbn = req.body.isbnFK;
+
+    const sqlCreateBookGenre = `INSERT INTO Book_Genres (genre_id, isbn) VALUES (?, ?)`;
+    const values = [genre_id, isbn];
+
+    db.pool.query(sqlCreateBookGenre, values, (err,result)=>{
+        if(err) {
+        console.log(err);
+        } 
+        console.log(result)});
+});
+
+app.post('/create_review', (req, res) => {
+    const member_id = req.body.memberIdFK;
+    const isbn = req.body.isbnFK;
+    const date_posted = req.body.datePosted;
+    const comment = req.body.comment;
+    const rating = req.body.rating;
+    const recommend = req.body.recommend;
+
+    const sqlCreateReview = 
+        `INSERT INTO Reviews (member_id, isbn, date_posted, comment, rating, recommend) VALUES (?, ?, ?, ?, ?, ?)`;
+    const values = [member_id, isbn, date_posted, comment, rating, recommend];
+
+    db.pool.query(sqlCreateReview, values, (err,result)=>{
+        if(err) {
+        console.log(err);
+        } 
+        console.log(result)});
+});
+
 
 
 
@@ -187,9 +261,38 @@ app.delete(`/saved_payments/:_id`, (req, res) =>{
 app.delete(`/book_genres/:_id`, (req, res) =>{
     const key = req.params._id;
     
-    const sqlDeletePayment = `DELETE FROM Book_Genres WHERE book_genres_id = ?;`
+    const sqlDeleteBookGenres = `DELETE FROM Book_Genres WHERE book_genres_id = ?;`
 
-    db.pool.query(sqlDeletePayment, key, (err,result)=>{
+    db.pool.query(sqlDeleteBookGenres, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+app.delete(`/members/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeleteMembers = `DELETE FROM Members WHERE member_id = ?;`
+
+    db.pool.query(sqlDeleteMembers, key, (err,result)=>{
+        if(err) {
+        console.log(err)}
+        else {
+            console.log('Delete successful')
+        }
+    })
+})
+
+
+app.delete(`/delete_books/:_id`, (req, res) =>{
+    const key = req.params._id;
+    
+    const sqlDeleteBook = `DELETE FROM Books WHERE isbn = ?;`
+
+    db.pool.query(sqlDeleteBook, key, (err,result)=>{
         if(err) {
         console.log(err)}
         else {
@@ -200,54 +303,46 @@ app.delete(`/book_genres/:_id`, (req, res) =>{
 
 
 
+// ---------------------------- UPDATE : Routes to update rows into a table  ---------------------------- 
+app.put('/update_member', (req,res)=> {
+    const member_id = req.body.memberId
+    const first_name = req.body.firstName
+    const last_name = req.body.lastName
+    const email = req.body.email
+    const phone_number = req.body.phoneNumber
+    const address_line = req.body.addressLine
+    const address_line_2 = req.body.addressLine2
+    const state = req.body.state
+    const city = req.body.city
+    const postal_code = req.body.postalCode
+    const auto_renew = req.body.autoRenew
+
+    const sqlUpdateMember = `UPDATE Members SET first_name=?, last_name=?, email=?, phone_number=?, address_line=?, address_line_2=?, state=?, city=?, postal_code=?, auto_renew=?
+    WHERE member_id=?`
+    const values = [first_name, last_name, email, phone_number, address_line, address_line_2, state, city, postal_code, auto_renew, member_id]
+
+    db.pool.query(sqlUpdateMember, values, (err,result)=>{
+        if(err) {
+        console.log(err)
+        } 
+        console.log(result)})
+
+    }
+);
 
 
+// ---------------------------- FILTER : Route to filter displayed rows in a table  ---------------------------- 
+app.get("/search_books", (req,res)=>{
+    const column = req.query.category
+    const filter = req.query.value
+    const sqlFilterBooks = `SELECT * FROM Books WHERE ${column} = '${filter}';`
 
-// Route to delete a post
-
-// app.delete('/api/delete/:id',(req,res)=>{
-// const id = req.params.id;
-
-// db.query("DELETE FROM posts WHERE id= ?", id, (err,result)=>{
-// if(err) {
-// console.log(err)
-//         } }) })
-
-
-
-
-
-// const username = req.body.userName;
-// const title = req.body.title;
-// const text = req.body.text;
-
-// db.query("INSERT INTO posts (title, post_text, user_name) VALUES (?,?,?)",[title,text,username], (err,result)=>{
-//    if(err) {
-//    console.log(err)
-//    } 
-//    console.log(result)
-// });   })
-
-// // Route to like a post
-// app.post('/api/like/:id',(req,res)=>{
-
-// const id = req.params.id;
-// db.query("UPDATE posts SET likes = likes + 1 WHERE id = ?",id, (err,result)=>{
-//     if(err) {
-//    console.log(err)   } 
-//    console.log(result)
-//     });    
-// });
-
-// // Route to delete a post
-
-// app.delete('/api/delete/:id',(req,res)=>{
-// const id = req.params.id;
-
-// db.query("DELETE FROM posts WHERE id= ?", id, (err,result)=>{
-// if(err) {
-// console.log(err)
-//         } }) })
+    db.pool.query(sqlFilterBooks, (err,result)=>{
+        if(err) {
+            console.log(err)
+            } 
+        res.send(result)
+        });   });
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)

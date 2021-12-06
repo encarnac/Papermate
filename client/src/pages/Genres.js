@@ -7,20 +7,20 @@ import { flipUrl } from '../utils/flipUrl';
 
 function Genres() {
      const genresProperties = ['genre_id', 'genre', 'community_url']; 
-     const [listGenres, setGenres] = useState([]) 
+     const [listGenres, setGenres] = useState([]);
      
      const [userName,setUserName] = useState("");
      const [title,setTitle] = useState("");
      const [text,setText] = useState("");
 
-     const [genre, setGenre] = useState("")
-     const [communityUrl, setCommunityUrl] = useState("")
+     const [genre, setGenre] = useState("");
+     const [communityUrl, setCommunityUrl] = useState("");
 
      useEffect(()=>{
           Axios.get("http://flip2.engr.oregonstate.edu:5983/genres").then((result)=>{
           setGenres(result.data)
           });
-          },[])
+          },[]);
      
      const createGenre = () => {
           Axios.post('http://flip2.engr.oregonstate.edu:5983/create_genre', 
