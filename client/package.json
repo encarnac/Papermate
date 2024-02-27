@@ -20,7 +20,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start start",
     "server": "node server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
